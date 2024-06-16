@@ -41,25 +41,26 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.sun.xml.ws</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>4.0.0</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>wsimport</goal>
+                            <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <generatePackage>com.soapdemo.demo.jaxbmodel</generatePackage>
+                            <generateDirectory>${project.build.directory}/generated-sources/jaxbmodel</generateDirectory>
+                            <schemaLanguage>WSDL</schemaLanguage>
+                            <schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+                            <schemaIncludes>
+                                <include>countries.wsdl</include>
+                            </schemaIncludes>
+                            <extension>true</extension>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <packageName>com.soapdemo.demo.jaxbmodel</packageName>
-                    <wsdlUrls>
-                        <wsdlUrl>${project.basedir}/src/main/resources/wsdl/countries.wsdl</wsdlUrl>
-                    </wsdlUrls>
-                    <sourceDestDir>${project.basedir}/src/main/java</sourceDestDir>
-                    <destDir>${project.basedir}/src/main/java</destDir>
-                    <extension>true</extension>
-                </configuration>
             </plugin>
         </plugins>
     </build>
